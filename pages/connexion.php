@@ -1,20 +1,57 @@
-<?php include 'header.php'; ?>
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EHN - Connexion</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
 
-<h1>Connexion</h1>
+<body>
 
-<form action="traitement_connexion.php" method="POST">
-    <label>Email</label>
-    <input type="email" name="email" required>
+    <header class="header">
+        <img src="/assets/img/EHN-logo.png" alt="Logo EHM" class="logo-right">
+    </header>
 
-    <label>Mot de passe</label>
-    <input type="password" name="password" required>
+    <nav class="navbar-expand">
+        <ul id="nav-links">
+            <li><a href="/index.php">Accueil</a></li>
+            <li><a href="/pages/propos.php">À Propos</a></li>
+            <li><a href="/pages/reservation.php">Réservation</a></li>
+            <li><a href="/pages/contact.php">Contact</a></li>
+        </ul>
+    </nav>
 
-    <button type="submit">Se connecter</button>
-</form>
+    <main class="connexion-container">
 
-<p>Pas de compte ? <a href="inscription.php">Créer un compte</a></p>
+        <h1 class="connexion-title">EHN Location de Voiture</h1>
 
-<?php include 'footer.php'; ?>
-<footer>
-    <p>© 2026 EHN - Tous droits réservés</p>
-</footer>
+        <form action="traitement_connexion.php" method="POST" class="connexion-form">
+
+            <label for="email">email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">mot de passe</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="btn-primary connexion-btn" >Se Connecter</button>
+
+            <p class="no-account">
+                Vous n’avez pas de compte ?
+                <a href="/pages/inscription.php">créez en un !</a>
+            </p>
+
+        </form>
+
+    </main>
+
+    <footer class="footer">
+        <p>Politique de confidentialité - Conditions générales d’utilisation</p>
+        <p>© 2026 EHM. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
