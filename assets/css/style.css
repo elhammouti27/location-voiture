@@ -1,0 +1,130 @@
+/* -------------------- */
+/* PALETTE EHM          */
+/* -------------------- */
+:root {
+    --blanc: #FFFFFF;
+    --dore: #D4A857;
+    --noir: #000000;
+    --gris: #2A2A2A;
+    --rouge: #E53935;
+}
+
+/* -------------------- */
+/* RESET                */
+/* -------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--blanc);
+    color: var(--noir);
+}
+
+/* -------------------- */
+/* HEADER               */
+/* -------------------- */
+header {
+    background: var(--noir);
+    padding: 15px 30px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    color: var(--blanc);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+header nav a:hover {
+    color: var(--dore);
+}
+
+/* Boutons Connexion / Inscription */
+header .btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    background: var(--dore);
+    color: var(--noir);
+    font-weight: bold;
+}
+
+header .btn:hover {
+    background: var(--blanc);
+    color: var(--noir);
+}
+
+/* -------------------- */
+/* SECTION ACCUEIL      */
+/* -------------------- */
+.hero {
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: var(--gris);
+}
+
+/* -------------------- */
+/* CARDS VEHICULES      */
+/* -------------------- */
+.vehicules {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.card {
+    background: var(--blanc);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.card .prix {
+    color: var(--dore);
+    font-weight: bold;
+}
+
+/* -------------------- */
+/* FOOTER               */
+/* -------------------- */
+footer {
+    background: var(--noir);
+    color: var(--blanc);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
