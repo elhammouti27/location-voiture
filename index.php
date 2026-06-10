@@ -12,10 +12,28 @@
     <header class="header">
         <img src="/assets/img/EHN-logo.png" alt="Logo EHM" class="logo-right">
         <div class="auth">
-            <a href="/pages/connexion.php" class="btn-primary">Connexion</a>
-            <a href="/pages/inscription.php" class="btn-primary">S’inscrire</a>
+            <?php session_start(); ?>
 
-            
+            <?php if (isset($_SESSION["user"])): ?>
+
+                <?php $_SESSION["previous_page"] = $_SERVER["REQUEST_URI"]; ?>
+
+
+                <a href="/pages/profil.php">
+                    <img src="/assets/img/profil.jpg"
+                        alt="Profil"
+                        style="width:35px; height:35px; border-radius:50%;">
+                </a>
+
+
+            <?php else: ?>
+
+                <a href="/pages/inscription.php" class="btn-primary">Inscription</a>
+                <a href="/pages/connexion.php" class="btn-primary">Connexion</a>
+
+            <?php endif; ?>
+
+
         </div>
     </header>
     <nav class="navbar-expand">

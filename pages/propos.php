@@ -4,6 +4,7 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,23 @@ session_start();
         <img src="/assets/img/EHN-logo.png" alt="Logo EHM" class="logo-right">
 
         <div class="auth">
-            <a href="/pages/connexion.php" class="btn-primary">Connexion</a>
-            <a href="/pages/inscription.php" class="btn-primary">S’inscrire</a>
+            <?php session_start(); ?>
+
+            <?php if (isset($_SESSION["user"])): ?>
+
+                <a href="/pages/profil.php">
+                    <img src="/assets/img/profil.jpg"
+                        alt="Profil"
+                        style="width:35px; height:35px; border-radius:50%;">
+                </a>
+
+            <?php else: ?>
+
+                <a href="/pages/inscription.php" class="btn-primary">Inscription</a>
+                <a href="/pages/connexion.php" class="btn-primary">Connexion</a>
+
+            <?php endif; ?>
+
         </div>
     </header>
 
@@ -53,7 +69,7 @@ session_start();
         <div class="apropos-text">
             <h2>Notre mission</h2>
             <p>
-                Rendre la location simple, rapide et accessible à tous.  
+                Rendre la location simple, rapide et accessible à tous.
                 Nous mettons à votre disposition des véhicules entretenus et un service client réactif.
             </p>
         </div>
@@ -70,4 +86,5 @@ session_start();
     </footer>
 
 </body>
+
 </html>

@@ -29,15 +29,11 @@ session_start();
 
         <h1 class="connexion-title">EHN Location de Voiture</h1>
 
-        <form action="traitement_connexion.php" method="POST" class="connexion-form">
+        <form action="traitement/traitement_connexion.php" method="POST" class="connexion-form">
 
-            <label for="email">email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">mot de passe</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit" class="btn-primary connexion-btn" >Se Connecter</button>
+            <input type="email" name="email" required>
+            <input type="password" name="password" required>
+            <button type="submit">Se connecter</button>
 
             <p class="no-account">
                 Vous n’avez pas de compte ?

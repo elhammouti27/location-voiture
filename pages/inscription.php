@@ -31,22 +31,30 @@ session_start();
 
         <h1 class="inscription-title">EHN Location de Voiture</h1>
 
-        <form action="traitement_inscription.php" method="POST" class="inscription-form">
+        <form action="traitement/traitement_inscription.php" method="POST" class="inscription-form">
 
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" required>
 
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" required>
+            <label>Nom</label>
+            <input type="text" name="firstname" required>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <label>Prénom</label>
+            <input type="text" name="lastname" required>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required>
+            <label>Carte d'identité (CIN)</label>
+            <input type="text" name="cin">
 
-            <label for="password2">Confirmation de mot de passe</label>
-            <input type="password" id="password2" name="password2" required>
+            <label>Numéro de téléphone</label>
+            <input type="text" name="phone_number">
+
+            <label>Email</label>
+            <input type="email" name="email">
+
+            <label>Permis de conduire</label>
+            <input type="text" name="permis">
+
+            <label>Mot de passe</label>
+            <input type="password" name="password">
+
 
             <button type="submit" class="inscription-btn">Créer le compte</button>
 

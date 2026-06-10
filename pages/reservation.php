@@ -1,5 +1,53 @@
 <?php
 session_start();
+require_once "../db.php";
+
+// Si l'utilisateur n'est pas connecté → redirection
+if (!isset($_SESSION["user"])) {
+    header("Location: /pages/connexion.php");
+    exit;
+}
+
+// Si id_car existe → on affiche le formulaire
+if (isset($_GET["id_car"])) {
+
+    $id_car = $_GET["id_car"];
+?>
+
+    <!DOCTYPE html>
+    <html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Réserver un véhicule</title>
+        <link rel="stylesheet" href="/assets/css/style.css">
+    </head>
+
+    <body>
+
+        <h2>Réserver ce véhicule</h2>
+
+        <form action="traitement/traitement_reservation.php" method="POST">
+
+
+            <input type="hidden" name="id_car" value="<?= $_GET['id_car'] ?>">
+
+            <label>Date de début :</label>
+            <input type="date" name="start_date" required><br><br>
+
+            <label>Date de fin :</label>
+            <input type="date" name="end_date" required><br><br>
+
+            <button type="submit">Valider la réservation</button>
+        </form>
+
+    </body>
+
+    </html>
+
+<?php
+    exit; // IMPORTANT : on arrête ici
+}
 ?>
 
 <!DOCTYPE html>
@@ -7,24 +55,27 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réservation - EHM</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
     <header class="header">
         <img src="/assets/img/EHN-logo.png" alt="Logo EHM" class="logo-right">
 
         <div class="auth">
-            <a href="/pages/connexion.php" class="btn-primary">Connexion</a>
-            <a href="/pages/inscription.php" class="btn-primary">S’inscrire</a>
+            <?php if (isset($_SESSION["user"])): ?>
+                <a href="/pages/profil.php">
+                    <img src="/assets/img/profil.jpg" alt="Profil" style="width:35px; height:35px; border-radius:50%;">
+                </a>
+            <?php else: ?>
+                <a href="/pages/inscription.php" class="btn-primary">Inscription</a>
+                <a href="/pages/connexion.php" class="btn-primary">Connexion</a>
+            <?php endif; ?>
         </div>
     </header>
 
-    <!-- NAVIGATION -->
     <nav class="navbar-expand">
         <ul id="nav-links">
             <li><a href="/index.php">Accueil</a></li>
@@ -34,51 +85,41 @@ session_start();
         </ul>
     </nav>
 
-    <!-- CONTENU RÉSERVATION -->
     <main class="reservation-container">
 
         <h1 class="reservation-title">Réserver un véhicule</h1>
 
-        <p class="reservation-subtitle">
-            Choisissez votre véhicule parmi notre sélection.
-        </p>
+        <?php
+        // Récupérer les voitures
+        $req = $pdo->query("SELECT * FROM cars");
+        $cars = $req->fetchAll();
+        ?>
 
-        <div class="cars-grid">
+        <?php if (count($cars) === 0): ?>
+            <p>Aucun véhicule disponible pour le moment.</p>
+        <?php else: ?>
 
-            <!-- CARD 1 -->
-            <div class="car-card">
-                <img src="/assets/img/bugatti.jpg" alt="Bugatti">
-                <h3>BUGATTI</h3>
-                <p class="car-category">HYPERCAR</p>
-                <p class="car-price">4500 € / jour</p>
-                <a href="#" class="car-btn">Voir plus</a>
+            <div class="cars-grid">
+
+                <?php foreach ($cars as $car): ?>
+                    <div class="car-card">
+                        <img src="/assets/img/default_car.jpg" alt="<?= $car['brand'] . ' ' . $car['model'] ?>">
+                        <h3><?= $car['brand'] ?></h3>
+                        <p class="car-price"><?= $car['price'] ?> € / jour</p>
+
+                        <a href="/pages/reservation.php?id_car=<?= $car['id_car'] ?>" class="car-btn">
+                            Réserver
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+
             </div>
 
-            <!-- CARD 2 -->
-            <div class="car-card">
-                <img src="/assets/img/peugeot208.jpg" alt="Peugeot 208">
-                <h3>PEUGEOT 208</h3>
-                <p class="car-category">CITADINE</p>
-                <p class="car-price">45 € / jour</p>
-                <a href="#" class="car-btn">Voir plus</a>
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="car-card">
-                <img src="/assets/img/leapmotor.jpg" alt="Leapmotor T03">
-                <h3>LEAPMOTOR T03</h3>
-                <p class="car-category">CITADINE</p>
-                <p class="car-price">39 € / jour</p>
-                <a href="#" class="car-btn">Voir plus</a>
-            </div>
-
-        </div>
+        <?php endif; ?>
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
-        <p>Politique de confidentialité - Conditions générales d’utilisation</p>
         <p>© 2026 EHM. Tous droits réservés.</p>
     </footer>
 
